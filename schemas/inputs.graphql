@@ -1,0 +1,22 @@
+
+
+input AddPickupParams {
+    big : ID!
+    little : ID!
+    isAdoption : Boolean #Defaults to FALSE
+    date : InputDate!
+    family : ID #Defaults to big.familyAsOf(date)
+}
+
+input AddFamilyParams {
+    name : String!
+    createdDate : InputDate  
+    founders : [ID]
+    members: [ID]
+    group : ID
+}
+
+input AddFamilyGroupParams {
+    name : String!
+    families : [ID]
+}

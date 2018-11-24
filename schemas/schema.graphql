@@ -1,0 +1,14 @@
+type Query {
+    memberByName(name : String!) : GreekMember
+    familyByName(name : String!) : Family
+    familyGroupByName(name : String!) : FamilyGroup
+    
+    currentActives : [GreekMember!]!
+}
+
+
+type Mutation {
+    addPickup(params : AddPickupParams) : Pickup
+    addFamily(params : AddFamilyParams) : Family
+    addFamilyGroup(params : AddFamilyGroupParams) : FamilyGroup
+}

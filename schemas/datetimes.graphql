@@ -1,0 +1,37 @@
+
+enum MonthEnum {
+    JANUARY, 
+    FEBRUARY, 
+    MARCH, 
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER,
+}
+
+type OutputDate {
+    year : Int!
+    
+    monthEnum : MonthEnum!
+    monthName : String!
+    monthNumber : Int!
+
+    dayOfMonth : Int 
+}
+
+input MonthInput {
+    name : String 
+    number : Int
+}
+input InputDate {
+    year : Int! 
+
+    month : MonthInput!
+
+    dayOfMonth : Int 
+}
