@@ -1,3 +1,45 @@
+#-------------------------- Date and Time schemas ----------------------------
+enum MonthEnum {
+    JANUARY, 
+    FEBRUARY, 
+    MARCH, 
+    APRIL,
+    MAY,
+    JUNE,
+    JULY,
+    AUGUST,
+    SEPTEMBER,
+    OCTOBER,
+    NOVEMBER,
+    DECEMBER,
+}
+
+type OutputDate {
+    year : Int!
+    
+    monthEnum : MonthEnum!
+    monthName : String!
+    monthNumber : Int!
+
+    dayOfMonth : Int 
+}
+
+input MonthInput {
+    name : String 
+    number : Int
+}
+input InputDate {
+    year : Int! 
+
+    month : MonthInput!
+
+    dayOfMonth : Int 
+}
+
+
+
+#----------------------------- Output schemas ----------------------------------
+
 """A current or former member in the greek life organization."""
 type GreekMember {
 
@@ -89,4 +131,44 @@ type Pickup {
     isAdoption : Boolean!
     date : OutputDate! 
     family : Family!
+}
+
+type Query {
+    memberByName(name : String!) : GreekMember
+    familyByName(name : String!) : Family
+    familyGroupByName(name : String!) : FamilyGroup
+    
+    currentActives : [GreekMember!]!
+}
+
+
+
+
+
+#----------------------------- Mutation schemas -------------------------------
+input AddPickupParams {
+    big : ID!
+    little : ID!
+    isAdoption : Boolean #Defaults to FALSE
+    date : InputDate!
+    family : ID #Defaults to big.familyAsOf(date)
+}
+
+input AddFamilyParams {
+    name : String!
+    createdDate : InputDate  
+    founders : [ID]
+    members: [ID]
+    group : ID
+}
+
+input AddFamilyGroupParams {
+    name : String!
+    families : [ID]
+}
+
+type Mutation {
+    addPickup(params : AddPickupParams) : Pickup
+    addFamily(params : AddFamilyParams) : Family
+    addFamilyGroup(params : AddFamilyGroupParams) : FamilyGroup
 }
